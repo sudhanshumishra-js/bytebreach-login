@@ -7,10 +7,19 @@ const ClientLoginForm = (props: any) => {
   const [email, setEmail] = useState<string>("");
   const handleChange = (event: any) => {
     setEmail(event.target.value);
+    props.handleEmailChange(event.target.value);
+  };
+  const handleClick = (event: any) => {
+    event.preventDefault();
+    props.handleSocialLogin(event);
   };
   return (
     <>
-      <button className="social__login__button">
+      <button
+        className="social__login__button"
+        name="google"
+        onClick={handleClick}
+      >
         <img
           src={googleIcon}
           alt="google__icon"

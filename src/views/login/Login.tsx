@@ -7,10 +7,17 @@ import overlayImg from "../../assets/images/Ellipse3.svg";
 const Login = () => {
   const [isLoginSubmitted, setIsLoginSubmitted] = useState(false);
   const [loginFormVersion, setLoginFormVersion] = useState("client");
-
+  const [email, setEmail] = useState("");
   const handleToggle = (event: any) => {
     const version = event.target.getAttribute("data-version");
     setLoginFormVersion(version);
+  };
+  const handleEmailChange = (email: string) => {
+    setEmail(email);
+    console.log(email);
+  };
+  const handleSocialLogin = (event: any) => {
+    console.log(event.currentTarget.name);
   };
   return (
     <main>
@@ -38,9 +45,15 @@ const Login = () => {
           </div>
           <div className="login__form">
             {loginFormVersion === "client" ? (
-              <ClientLoginForm />
+              <ClientLoginForm
+                handleEmailChange={handleEmailChange}
+                handleSocialLogin={handleSocialLogin}
+              />
             ) : (
-              <AuditorLoginForm />
+              <AuditorLoginForm
+                handleEmailChange={handleEmailChange}
+                handleSocialLogin={handleSocialLogin}
+              />
             )}
           </div>
         </div>
