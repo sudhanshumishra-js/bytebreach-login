@@ -18,7 +18,7 @@ const AuthContextProvider = (props) => {
     const storedAuthState = localStorage.getItem("authState");
     return storedAuthState
       ? JSON.parse(storedAuthState)
-      : { isLoggedIn: false, userState: null };
+      : { isLoggedIn: false, userData: null };
   };
   const [authState, setAuthState] = React.useState(getInitialState);
   const [web3auth, setWeb3auth] = useState(null);
@@ -37,7 +37,18 @@ const AuthContextProvider = (props) => {
   }, [authState]);
 
   const login = (state) => {
-    setAuthState({ ...authState, isLoggedIn: true, userState: state });
+    setAuthState({ ...authState, isLoggedIn: true, userData: state });
+  };
+  const syncState = async () => {
+    try {
+      if (web3auth.connected) {
+        const state = await web3auth.getUserInfo();
+        setAuthState({ ...authState, isLoggedIn: true, userData: state });
+        console.log("loggedin with payload", authState?.userData);
+      }
+    } catch (error) {
+      console.log("Error while login", error);
+    }
   };
   const loginWithGoogle = async () => {
     if (!web3auth) {
@@ -52,14 +63,7 @@ const AuthContextProvider = (props) => {
     );
     console.log("google login payload returned ", web3authProvider);
     setProvider(web3authProvider);
-    try {
-      if (web3auth.connected) {
-        const state = await web3auth.getUserInfo();
-        setAuthState({ ...authState, isLoggedIn: true, userState: state });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    await syncState();
   };
   const loginWithGithub = async () => {
     if (!web3auth) {
@@ -74,7 +78,7 @@ const AuthContextProvider = (props) => {
     );
     setProvider(web3authProvider);
   };
-  const loginWithEmail = async () => {
+  const loginWithEmail = async (email) => {
     if (!web3auth) {
       console.log("Web3Auth not initialized yet");
       return;
@@ -84,11 +88,12 @@ const AuthContextProvider = (props) => {
       {
         loginProvider: "email_passwordless",
         extraLoginOptions: {
-          login_hint: "hello@web3auth.io",
+          login_hint: email,
         },
       }
     );
     setProvider(web3authProvider);
+    await syncState();
   };
   const loginWCModal = async () => {
     if (!web3auth) {
@@ -102,7 +107,7 @@ const AuthContextProvider = (props) => {
   };
   const logout = async () => {
     await web3auth.logout();
-    setAuthState({ ...authState, isLoggedIn: false, userState: null });
+    setAuthState({ ...authState, isLoggedIn: false, userData: null });
   };
 
   useEffect(() => {

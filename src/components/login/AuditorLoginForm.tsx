@@ -16,6 +16,10 @@ const AuditorLoginForm = (props: any) => {
     props.handleSocialLogin(event);
   };
 
+  const handleEmailLogin = (event: any) => {
+    event.preventDefault();
+    props.handleEmailLogin(email);
+  };
   return (
     <>
       <div className="auditor__form__button__container">
@@ -77,7 +81,9 @@ const AuditorLoginForm = (props: any) => {
           />
         </div>
       </div>
-      <button className="submit__button">Submit</button>
+      <button className="submit__button" onClick={handleEmailLogin}>
+        Submit
+      </button>
     </>
   );
 };

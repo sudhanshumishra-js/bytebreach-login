@@ -9,6 +9,10 @@ const ClientLoginForm = (props: any) => {
     setEmail(event.target.value);
     props.handleEmailChange(event.target.value);
   };
+  const handleEmailLogin = (event: any) => {
+    event.preventDefault();
+    props.handleEmailLogin(email);
+  };
   const handleClick = (event: any) => {
     event.preventDefault();
     props.handleSocialLogin(event);
@@ -48,7 +52,9 @@ const ClientLoginForm = (props: any) => {
           />
         </div>
       </div>
-      <button className="submit__button">Submit</button>
+      <button className="submit__button" onClick={handleEmailLogin}>
+        Submit
+      </button>
     </>
   );
 };
