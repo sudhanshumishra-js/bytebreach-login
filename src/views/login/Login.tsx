@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AuditorLoginForm from "../../components/login/AuditorLoginForm";
 import ClientLoginForm from "../../components/login/ClientLoginForm";
 import "./Login.style.css";
 import backgroundImg from "../../assets/images/hero-image.png";
 import overlayImg from "../../assets/images/Ellipse3.svg";
+import { AuthContext } from "../../context/AuthContext";
 const Login = () => {
   const [isLoginSubmitted, setIsLoginSubmitted] = useState(false);
   const [loginFormVersion, setLoginFormVersion] = useState("client");
   const [email, setEmail] = useState("");
+  const {
+    authState,
+    loginWithGoogle,
+    loginWithGithub,
+    loginWithEmail,
+    loginWCModal,
+    logout,
+  } = useContext(AuthContext);
+
   const handleToggle = (event: any) => {
     const version = event.target.getAttribute("data-version");
     setLoginFormVersion(version);
@@ -18,7 +28,9 @@ const Login = () => {
   };
   const handleSocialLogin = (event: any) => {
     console.log(event.currentTarget.name);
+    loginWithGoogle();
   };
+
   return (
     <main>
       <div className="login__container">
