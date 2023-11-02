@@ -141,3 +141,20 @@
 
   }
   
+
+  .contact__details__container{
+    width: 100%;
+    max-width: 41rem;
+    margin: auto; 
+    border-radius: 2.125rem;
+    border: 1px solid var(--neutral-300, #EFF0F6);
+    background: var(--neutral-100, #FFF);
+    box-shadow: 0px 5px 16px 0px rgba(8, 15, 52, 0.06);
+    padding: 0px 2rem;
+    padding-bottom: 1rem;
+  }
+  @media(max-width:575px) {
+   .contact__details__container{
+    margin-top: 3rem;
+   }
+  }

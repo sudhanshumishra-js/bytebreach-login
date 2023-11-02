@@ -46,65 +46,56 @@ const Login = () => {
       setIsClientLogin(false);
       setIsAuditorLogin(true);
     }
-    console.log(
-      "authState.isLoggedIn ",
-      authState.isLoggedIn,
-      "isLoginSubmitted ",
-      isLoginSubmitted,
-      "isClientLogin ",
-      isClientLogin,
-      "isAuditorLogin ",
-      isAuditorLogin
-    );
   }, [authState]);
 
   console.log(authState.isLoggedIn, isLoginSubmitted);
   return (
     <main>
       <div className="login__container">
-        <div className="login__form__container">
-          {!authState.isLoggedIn && (
-            <>
-              <div className="login__form__toggle__container">
-                <div
-                  className={`login__form__toggle__div ${
-                    loginFormVersion === "client" ? "active" : ""
-                  } left`}
-                  onClick={handleToggle}
-                  data-version="client"
-                >
-                  Client
-                </div>
-                <div
-                  className={`login__form__toggle__div ${
-                    loginFormVersion === "auditor" ? "active" : ""
-                  } right`}
-                  onClick={handleToggle}
-                  data-version="auditor"
-                >
-                  Auditors
-                </div>
+        {!authState.isLoggedIn ? (
+          <div className="login__form__container">
+            <div className="login__form__toggle__container">
+              <div
+                className={`login__form__toggle__div ${
+                  loginFormVersion === "client" ? "active" : ""
+                } left`}
+                onClick={handleToggle}
+                data-version="client"
+              >
+                Client
               </div>
-              <div className="login__form">
-                {loginFormVersion === "client" ? (
-                  <ClientLoginForm
-                    handleEmailChange={handleEmailChange}
-                    handleEmailLogin={handleEmailLogin}
-                    handleSocialLogin={handleSocialLogin}
-                  />
-                ) : (
-                  <AuditorLoginForm
-                    handleEmailChange={handleEmailChange}
-                    handleEmailLogin={handleEmailLogin}
-                    handleSocialLogin={handleSocialLogin}
-                  />
-                )}
+              <div
+                className={`login__form__toggle__div ${
+                  loginFormVersion === "auditor" ? "active" : ""
+                } right`}
+                onClick={handleToggle}
+                data-version="auditor"
+              >
+                Auditors
               </div>
-            </>
-          )}
+            </div>
+            <div className="login__form">
+              {loginFormVersion === "client" ? (
+                <ClientLoginForm
+                  handleEmailChange={handleEmailChange}
+                  handleEmailLogin={handleEmailLogin}
+                  handleSocialLogin={handleSocialLogin}
+                />
+              ) : (
+                <AuditorLoginForm
+                  handleEmailChange={handleEmailChange}
+                  handleEmailLogin={handleEmailLogin}
+                  handleSocialLogin={handleSocialLogin}
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="contact__details__container">
+            {isClientLogin ? <ClientDetailsForm /> : <AuditorDetailsForm />}
+          </div>
+        )}
 
-          {isClientLogin ? <ClientDetailsForm /> : <AuditorDetailsForm />}
-        </div>
         <div className="login__image__container">
           <div className="login__image__overlay__div">
             <img src={overlayImg} alt="overlay_background_image" />

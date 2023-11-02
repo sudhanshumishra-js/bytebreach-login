@@ -1,0 +1,117 @@
+.details__form__heading{
+    margin: 0;
+    color: var(--neutral-800, #170F49);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: "DM Sans",sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.1875rem; 
+}
+.details__form__subheading{
+    margin: 0;
+    color: var(--neutral-600, #6F6C90);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: DM Sans;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.875rem; 
+}
+.input__container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 37rem; 
+    margin: auto;
+}
+.input__field{
+    padding: 10px 0px;
+    border-radius: 46px;
+    width: 100%;
+    max-width: 542px;
+    border: 1px solid var(--neutral-300, #EFF0F6);
+    position: relative;
+    box-shadow: 0px 2px 6px 0px rgba(19, 18, 66, 0.07);
+    padding: 1.4rem 1.6rem;
+    color: var(--neutral-600, #6F6C90);
+    font-family: DM Sans;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;  
+}
+.details__form__label{
+    color: var(--neutral-800, #170F49);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: "DM Sans",sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem; 
+    display: block;
+    margin-bottom: 0.81rem;
+    
+}
+.input__icons__gray{
+    position: absolute;
+    right: 1.5rem;
+    transform: translateY(50%);
+
+}
+.flex__input__container{
+
+}
+
+.flex__input__container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media(min-width:768px) {
+    .flex__input__container{
+       flex-direction: row;
+       justify-content: space-between;
+       flex-wrap: wrap;
+       align-items: center;
+    }
+    
+}
+@media(max-width:768px) {
+    .flex__input__container-div{
+      width: 100%;
+    }
+    
+}
+
+
+
+.line--gray {
+    background-color:  #D4D4D4;
+    width: 100%;
+    max-width: 36.9375rem;
+    height: 0.0625rem;
+    display: block;
+    margin: auto;
+    margin-bottom: 1.31rem; 
+    margin-top: 1.57rem;
+  }
+
+  .back__icon{
+    position: absolute; 
+    left: 5%;
+  }
+  @media(max-width:575px) {
+    .back__icon{
+        left: 1rem;
+        top: 1rem;
+    }
+  }
+
+  .error::after {
+    content: " *";
+    color: red;
+  }
