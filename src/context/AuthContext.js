@@ -39,10 +39,11 @@ const AuthContextProvider = (props) => {
   const login = (state) => {
     setAuthState({ ...authState, isLoggedIn: true, userData: state });
   };
-  const syncState = async () => {
+  const syncState = async (role) => {
     try {
       if (web3auth.connected) {
         const state = await web3auth.getUserInfo();
+        state.role = role;
         setAuthState({ ...authState, isLoggedIn: true, userData: state });
         console.log("loggedin with payload", authState?.userData);
       }
@@ -50,7 +51,7 @@ const AuthContextProvider = (props) => {
       console.log("Error while login", error);
     }
   };
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (role) => {
     if (!web3auth) {
       console.log("web3auth not initialized yet");
       return;
@@ -63,7 +64,7 @@ const AuthContextProvider = (props) => {
     );
     console.log("google login payload returned ", web3authProvider);
     setProvider(web3authProvider);
-    await syncState();
+    await syncState(role);
   };
   const loginWithGithub = async () => {
     if (!web3auth) {
@@ -78,7 +79,7 @@ const AuthContextProvider = (props) => {
     );
     setProvider(web3authProvider);
   };
-  const loginWithEmail = async (email) => {
+  const loginWithEmail = async (email, role) => {
     if (!web3auth) {
       console.log("Web3Auth not initialized yet");
       return;
@@ -93,7 +94,7 @@ const AuthContextProvider = (props) => {
       }
     );
     setProvider(web3authProvider);
-    await syncState();
+    await syncState(role);
   };
   const loginWCModal = async () => {
     if (!web3auth) {

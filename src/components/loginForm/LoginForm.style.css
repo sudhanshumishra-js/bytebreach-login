@@ -54,11 +54,10 @@
     margin-bottom: 0.81rem;
     
 }
-.input__icons__gray{
+.input__icons__gray-50{
     position: absolute;
     right: 1.5rem;
     transform: translateY(50%);
-
 }
 .flex__input__container{
 

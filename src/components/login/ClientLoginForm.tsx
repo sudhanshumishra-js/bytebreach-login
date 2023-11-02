@@ -11,11 +11,11 @@ const ClientLoginForm = (props: any) => {
   };
   const handleEmailLogin = (event: any) => {
     event.preventDefault();
-    props.handleEmailLogin(email);
+    props.handleEmailLogin(email, "client");
   };
   const handleClick = (event: any) => {
     event.preventDefault();
-    props.handleSocialLogin(event);
+    props.handleSocialLogin(event, "client");
   };
   return (
     <>

@@ -29,12 +29,12 @@ const Login = () => {
   const handleEmailChange = (email: string) => {
     setEmail(email);
   };
-  const handleEmailLogin = (email: string) => {
-    loginWithEmail(email);
+  const handleEmailLogin = (email: string, role: string) => {
+    loginWithEmail(email, role);
   };
-  const handleSocialLogin = (event: any) => {
+  const handleSocialLogin = (event: any, role: string) => {
     if (event.currentTarget.name === "google") {
-      loginWithGoogle();
+      loginWithGoogle(role);
     }
   };
 
@@ -42,7 +42,7 @@ const Login = () => {
     if (authState.userData?.role && authState.userData?.role === "client") {
       setIsClientLogin(true);
       setIsAuditorLogin(false);
-    } else {
+    } else if (authState.userData?.role === "auditor") {
       setIsClientLogin(false);
       setIsAuditorLogin(true);
     }

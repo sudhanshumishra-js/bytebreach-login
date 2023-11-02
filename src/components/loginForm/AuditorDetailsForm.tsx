@@ -8,6 +8,7 @@ import companyIconGray from "../../assets/icons/company-icon-gray.svg";
 import emailIconGray from "../../assets/icons/email-icon-gray.svg";
 import sherlockIcon from "../../assets/icons/sherlock-icon.svg";
 import backIcon from "../../assets/icons/right.svg";
+import { useNavigate } from "react-router-dom";
 type Inputs = {
   fullName: string;
   github: string;
@@ -19,13 +20,14 @@ type Inputs = {
 };
 
 const AuditorDetailsForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => navigate("/dashboard");
 
   return (
     <>
@@ -52,12 +54,16 @@ const AuditorDetailsForm = () => {
               <img
                 src={userIconGray}
                 alt="input_field"
-                className="input__icons__gray"
+                className="input__icons__gray-50"
               />
             </div>
           </div>
           <div>
-            <label className="details__form__label">GitHub</label>
+            <label
+              className={`details__form__label ${errors.github ? "error" : ""}`}
+            >
+              GitHub
+            </label>
             <div className="input__field__container">
               <input
                 {...register("github", { required: true })}
@@ -67,13 +73,19 @@ const AuditorDetailsForm = () => {
               <img
                 src={githubIconGray}
                 alt="input_field"
-                className="input__icons__gray"
+                className="input__icons__gray-50"
               />
             </div>
           </div>
 
           <div>
-            <label className="details__form__label">Weekly Cost</label>
+            <label
+              className={`details__form__label ${
+                errors.weeklyCost ? "error" : ""
+              }`}
+            >
+              Weekly Cost
+            </label>
             <div className="input__field__container">
               <input
                 {...register("weeklyCost", { required: true })}
@@ -94,7 +106,7 @@ const AuditorDetailsForm = () => {
               <img
                 src={twitterIconGray}
                 alt="input_field"
-                className="input__icons__gray"
+                className="input__icons__gray-50"
               />
             </div>
           </div>
@@ -127,7 +139,13 @@ const AuditorDetailsForm = () => {
             </div>
           </div>
           <div>
-            <label className="details__form__label">Invite Code</label>
+            <label
+              className={`details__form__label ${
+                errors.inviteCode ? "error" : ""
+              }`}
+            >
+              Invite Code
+            </label>
             <div className="input__field__container">
               <input
                 {...register("inviteCode", { required: true })}

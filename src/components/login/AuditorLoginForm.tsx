@@ -13,12 +13,12 @@ const AuditorLoginForm = (props: any) => {
   };
   const handleClick = (event: any) => {
     event.preventDefault();
-    props.handleSocialLogin(event);
+    props.handleSocialLogin(event, "auditor");
   };
 
   const handleEmailLogin = (event: any) => {
     event.preventDefault();
-    props.handleEmailLogin(email);
+    props.handleEmailLogin(email, "auditor");
   };
   return (
     <>
